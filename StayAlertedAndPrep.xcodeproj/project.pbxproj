@@ -29,9 +29,22 @@
 		FE1D3FD02CC2F03300294CBC /* StayAlertedAndPrepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StayAlertedAndPrepUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FE1D3FE92CC2F21300294CBC /* Exceptions for "StayAlertedAndPrep" folder in "StayAlertedAndPrep" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FE1D3FB52CC2F03200294CBC /* StayAlertedAndPrep */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FE1D3FB82CC2F03200294CBC /* StayAlertedAndPrep */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FE1D3FE92CC2F21300294CBC /* Exceptions for "StayAlertedAndPrep" folder in "StayAlertedAndPrep" target */,
+			);
 			path = StayAlertedAndPrep;
 			sourceTree = "<group>";
 		};
@@ -397,7 +410,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StayAlertedAndPrep/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = StayAlertedAndPrep/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -425,7 +439,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StayAlertedAndPrep/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = StayAlertedAndPrep/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
