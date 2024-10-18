@@ -1,40 +1,60 @@
 import SwiftUI
+import MapKit
+import Combine
 
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default location (e.g., San Francisco)
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
 
     var body: some View {
-        VStack {
-            if let location = locationManager.userLocation {
-                Text("Latitude: \(location.coordinate.latitude)")
-                Text("Longitude: \(location.coordinate.longitude)")
-            } else {
-                Text("Fetching location...")
-            }
-
-            if let status = locationManager.status {
-                if status == .denied {
-                    Text("Location access denied. Please enable location in settings.")
-                        .foregroundColor(.red)
+        TabView {
+            // Flood Zone Tab
+            Text("Flood Zone")
+                .tabItem {
+                    Image(systemName: "cloud.rain")
+                    Text("Flood Zone")
                 }
-            }
 
-            Button(action: {
-                locationManager.startTracking()
-            }) {
-                Text("Start Tracking Location")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
+            // Hurricane Tracker Tab
+            Text("Hurricane Tracker")
+                .tabItem {
+                    Image(systemName: "tropicalstorm")
+                    Text("Hurricane Tracker")
+                }
+
+            // Disaster News Tab - Displays FEMA API Data
+            DisasterNewsView()
+                .tabItem {
+                    Image(systemName: "newspaper")
+                    Text("Disaster News")
+                }
+
+            // Food Search Tab (Sign-in Required)
+            Text("Food Search (Sign-in Required)")
+                .tabItem {
+                    Image(systemName: "fork.knife")
+                    Text("Food Search")
+                }
+
+            // Medication Search Tab (Sign-in Required)
+            Text("Medication Search (Sign-in Required)")
+                .tabItem {
+                    Image(systemName: "pills")
+                    Text("Medication Search")
+                }
+
+            // Health Care Tab (Sign-in Required)
+            Text("Health Care (Sign-in Required)")
+                .tabItem {
+                    Image(systemName: "heart.text.square")
+                    Text("Health Care")
+                }
         }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        .onAppear {
+            locationManager.startTracking()  // Start location tracking
+        }
     }
 }
