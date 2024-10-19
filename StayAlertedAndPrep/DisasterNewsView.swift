@@ -8,10 +8,7 @@ struct DisasterNewsView: View {
     var body: some View {
         VStack {
             if let userLocation = locationManager.userLocation {
-                Text("Disaster News")
-                    .font(.largeTitle)
-                    .padding()
-                
+
                 // Show the disaster data once fetched
                 if apiService.disasterSummaries.isEmpty {
                     Text("Fetching disaster data...")
@@ -40,6 +37,10 @@ struct DisasterNewsView: View {
                                     .foregroundColor(.gray)
                             }
                             .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                            .frame(maxWidth: .infinity)  // Ensure the width is consistent
                         }
                     }
                 }
@@ -47,6 +48,9 @@ struct DisasterNewsView: View {
                 Text("Fetching location...")
             }
         }
+        .padding(.top) // Final padding adjustment for layout
+        .navigationTitle("Disaster")
+        .navigationBarTitleDisplayMode(.inline) // Use inline title to reduce top margin
         .onAppear {
             locationManager.startTracking()  // Start location tracking again
         }
