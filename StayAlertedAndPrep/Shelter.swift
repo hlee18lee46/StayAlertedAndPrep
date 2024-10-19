@@ -1,17 +1,22 @@
 import Foundation
 
-struct Shelter: Identifiable, Codable {
-    var id = UUID()  // Automatically generate a unique ID
+// Structure for an individual shelter
+struct Shelter: Codable, Identifiable {
+    let place_id: String  // Google Places ID, using this as a unique identifier
     let name: String
-    let vicinity: String?  // Make this optional
-    
+    let formatted_address: String?  // Optional since it might not always be present
+
+    // Conformance to Identifiable protocol
+    var id: String { place_id }
+
     enum CodingKeys: String, CodingKey {
+        case place_id
         case name
-        case vicinity = "address"  // Use the correct key based on the actual JSON
+        case formatted_address
     }
 }
 
+// Structure for the API response
 struct ShelterResponse: Codable {
-    let results: [Shelter]
+    let results: [Shelter]  // Results array contains shelters
 }
-

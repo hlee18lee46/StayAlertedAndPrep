@@ -13,15 +13,15 @@ class APIService: ObservableObject {
         let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=hurricane+shelters+in+\(county)&key=\(apiKey)"
         
         guard let url = URL(string: urlString) else { return }
-        
+
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 do {
-                    // Print raw JSON for debugging
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Raw JSON: \(jsonString)")
-                    }
+                    // Print the raw JSON response for debugging
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Raw JSON: \(json)")  // Ensure you print the raw JSON to debug
 
+                    // Decode the ShelterResponse
                     let response = try JSONDecoder().decode(ShelterResponse.self, from: data)
                     DispatchQueue.main.async {
                         self.shelters = response.results
@@ -30,7 +30,7 @@ class APIService: ObservableObject {
                     print("Error decoding shelter data: \(error)")
                 }
             } else if let error = error {
-                print("Error fetching shelters: \(error)")
+                print("Error fetching shelter data: \(error)")
             }
         }.resume()
     }
