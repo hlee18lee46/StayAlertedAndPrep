@@ -1,10 +1,39 @@
 import CoreLocation
+import Foundation
+
 
 class APIService: ObservableObject {
     @Published var disasterSummaries: [DisasterSummary] = []
     @Published var stateName: String? = ""
     @Published var floodAlerts: [FloodAlert] = []  // Ensure this exists
+    @Published var shelters: [Shelter] = []
     // Fetch Flood Alerts
+    func getShelters(forCounty county: String) {
+        let apiKey = "AIzaSyBMjCQSqjthzHMDx7K-c_BSAKxrew1xCZE"
+        let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=hurricane+shelters+in+\(county)&key=\(apiKey)"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    // Print raw JSON for debugging
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("Raw JSON: \(jsonString)")
+                    }
+
+                    let response = try JSONDecoder().decode(ShelterResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        self.shelters = response.results
+                    }
+                } catch {
+                    print("Error decoding shelter data: \(error)")
+                }
+            } else if let error = error {
+                print("Error fetching shelters: \(error)")
+            }
+        }.resume()
+    }
     func getFloodAlerts() {
         let url = URL(string: "https://api.weather.gov/alerts/active?area=FL")!
 

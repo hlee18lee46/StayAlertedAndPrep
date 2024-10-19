@@ -2,10 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Location permission descriptions -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>We need your location to send you real-time emergency alerts based on your area.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>We need your location to provide emergency preparedness updates.</string>
+    
+    <!-- App version and identifier -->
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>CFBundleIdentifier</key>
@@ -15,6 +18,16 @@
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
 
+    <!-- App Transport Security settings -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+    <!-- Google Maps API Key -->
+    <key>GMSApiKey</key>
+    <string>AIzaSyAJVpCQiB65yj_PNqU2_VtYx45hOukCbsM</string>
 
 </dict>
 </plist>

@@ -11,6 +11,10 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
+            SheltersView()
+                .tabItem {
+                    Label("Shelters", systemImage: "house.fill")
+                }
             // Flood Zone Tab
             Text("Flood Zone")
                 .tabItem {
