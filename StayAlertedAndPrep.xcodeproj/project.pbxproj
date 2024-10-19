@@ -211,6 +211,7 @@
 			packageReferences = (
 				FE9106062CC3575600C6CCFC /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
 				FE9106072CC35B3E00C6CCFC /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				FE4DE4832CC3993C00DB75AF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FE1D3FB72CC2F03200294CBC /* Products */;
@@ -577,6 +578,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FE4DE4832CC3993C00DB75AF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 		FE9106062CC3575600C6CCFC /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/google-maps-ios-utils.git";

@@ -7,7 +7,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocation? = nil
     @Published var status: CLAuthorizationStatus? = nil
     @Published var userCounty: String? = nil  // To store the user's county
-    
+    @Published var userCity: String? = nil    // To store the user's city
+    @Published var userState: String? = nil   // To store the user's state
+
     override init() {
         super.init()
         locationManager.delegate = self
@@ -34,7 +36,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    // Reverse geocoding to get county or administrative area
+    // Reverse geocoding to get county, city, and state
     func reverseGeocode(location: CLLocation) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
@@ -44,8 +46,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     DispatchQueue.main.async {
                         self.userCounty = county
                     }
-                } else {
-                    print("Failed to retrieve the county from location.")
+                }
+                // Extract the city (locality)
+                if let city = placemark.locality {
+                    DispatchQueue.main.async {
+                        self.userCity = city
+                    }
+                }
+                // Extract the state (administrativeArea)
+                if let state = placemark.administrativeArea {
+                    DispatchQueue.main.async {
+                        self.userState = state
+                    }
                 }
             } else if let error = error {
                 print("Error in reverse geocoding: \(error.localizedDescription)")

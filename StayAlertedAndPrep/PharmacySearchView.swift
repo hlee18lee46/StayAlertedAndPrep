@@ -1,40 +1,39 @@
 import SwiftUI
 import CoreLocation
 
-struct SheltersView: View {
+struct PharmacySearchView: View {
+    @StateObject private var pharmacyAPIService = PharmacyAPIService()
     @StateObject private var locationManager = LocationManager()
-    @StateObject private var apiService = APIService()
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack {
 
-                if let county = locationManager.userCounty {
-                    if apiService.shelters.isEmpty {
-                        Text("Loading shelters in \(county)...")
-                            .padding(.horizontal)
+                if let userLocation = locationManager.userLocation {
+                    if pharmacyAPIService.pharmacies.isEmpty {
+                        Text("Searching for pharmacies nearby...")
                             .onAppear {
-                                apiService.getShelters(forCounty: county)
+                                pharmacyAPIService.searchForPharmacies(near: userLocation.coordinate) // Extract coordinate
                             }
                     } else {
                         ScrollView {
                             VStack(spacing: 15) { // Added spacing between cards
-                                ForEach(apiService.shelters, id: \.place_id) { shelter in
-                                    NavigationLink(destination: ShelterDetailView(shelter: shelter)) {
+                                ForEach(pharmacyAPIService.pharmacies, id: \.place_id) { pharmacy in
+                                    NavigationLink(destination: PharmacyDetailView(pharmacy: pharmacy)) {
                                         VStack(alignment: .leading, spacing: 8) {
-                                            Text(shelter.name)
+                                            Text(pharmacy.name)
                                                 .font(.headline)
                                                 .foregroundColor(.blue)
 
-                                            Text(shelter.formatted_address ?? "Unknown address")
+                                            Text(pharmacy.vicinity ?? "Unknown address")
                                                 .font(.subheadline)
                                                 .foregroundColor(.gray)
 
                                             // Display distance
                                             if let userLocation = locationManager.userLocation {
-                                                let shelterLocation = CLLocation(latitude: shelter.geometry.location.lat,
-                                                                                 longitude: shelter.geometry.location.lng)
-                                                let distance = userLocation.distance(from: shelterLocation) / 1000 // distance in kilometers
+                                                let pharmacyLocation = CLLocation(latitude: pharmacy.geometry.location.lat,
+                                                                                 longitude: pharmacy.geometry.location.lng)
+                                                let distance = userLocation.distance(from: pharmacyLocation) / 1000 // distance in kilometers
                                                 Text(String(format: "Distance: %.2f km", distance))
                                                     .font(.subheadline)
                                                     .foregroundColor(.blue)
@@ -51,18 +50,17 @@ struct SheltersView: View {
                                     .buttonStyle(PlainButtonStyle()) // Remove default link style
                                 }
                             }
-                            .padding(.horizontal) // Apply padding to the list of shelters
+                            .padding(.horizontal) // Apply padding to the list of pharmacies
                         }
                     }
                 } else {
-                    Text("Detecting your county...")
+                    Text("Detecting your location...")
                         .padding(.horizontal)
                 }
             }
             .padding(.top) // Final padding adjustment for layout
-            .navigationTitle("Hurricane Shelters")
+            .navigationTitle("Nearby Pharmacies")
             .navigationBarTitleDisplayMode(.inline) // Use inline title to reduce top margin
-
         }
     }
 }
