@@ -7,7 +7,7 @@ StayAlertedAndPrep is an all-in-one emergency preparedness app that provides use
 	•	Flood Alerts: Real-time flood warnings to keep users updated on possible dangers in their area.
 	•	Nearby Shelters: Displays a list of local hurricane shelters, complete with distance and maps to help users navigate in emergencies.
 	•	Grocery Stores & Pharmacies: Provides locations of nearby grocery stores and pharmacies, crucial for restocking supplies before and after disasters.
-	•	Disaster News: A feed of disaster-related news from FEMA and other sources, ensuring users are always informed.
+	•	Nearby Disaster: A feed of disaster-related news from FEMA and other sources, ensuring users are always informed.
 	•	Interactive Map: Users can view the locations of shelters, grocery stores, and pharmacies directly on an interactive map.
 
 ##How we built it
@@ -17,6 +17,7 @@ StayAlertedAndPrep was built using the following technologies:
 	•	SwiftUI: For the user interface, providing a sleek and modern design.
 	•	MapKit: Integrated to provide an interactive map for displaying nearby shelters, stores, and pharmacies.
 	•	Google Places API: Used to search for nearby grocery stores and pharmacies based on the user’s current location.
+	•	api.weather.gov: Used to search for flood alerts
 	•	FEMA API: Used to pull disaster-related news and updates.
 	•	CoreLocation: To track the user’s real-time location and provide accurate location-based search results.
 	•	Swift: The primary programming language used to build the app for iOS.
