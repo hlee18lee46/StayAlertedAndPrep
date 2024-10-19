@@ -24,7 +24,7 @@ struct ContentView: View {
                 DisasterNewsView()
                     .tabItem {
                         Image(systemName: "newspaper")
-                        Text("Disaster News")
+                        Text("Nearby Disaster")
                     }
                 GrocerySearchView()
                     .tabItem {

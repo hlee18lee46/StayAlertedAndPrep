@@ -5,9 +5,6 @@ struct FloodAlertsView: View {
 
     var body: some View {
         VStack {
-            Text("Flood Alerts for Florida")
-                .font(.largeTitle)
-                .padding()
 
             if apiService.floodAlerts.isEmpty {
                 Text("Loading flood alerts...") // Display while data is loading
@@ -27,10 +24,16 @@ struct FloodAlertsView: View {
                                 .foregroundColor(.gray)
                         }
                         .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                        .frame(maxWidth: .infinity)  // Ensure the width is consistent
                     }
                 }
             }
         }
-        .padding()
+        .padding(.top) // Final padding adjustment for layout
+        .navigationTitle("Flood Alerts")
+        .navigationBarTitleDisplayMode(.inline) // Use inline title to reduce top margin
     }
 }
