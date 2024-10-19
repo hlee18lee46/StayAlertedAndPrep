@@ -3,7 +3,27 @@ import CoreLocation
 class APIService: ObservableObject {
     @Published var disasterSummaries: [DisasterSummary] = []
     @Published var stateName: String? = ""
+    @Published var floodAlerts: [FloodAlert] = []  // Ensure this exists
+    // Fetch Flood Alerts
+    func getFloodAlerts() {
+        let url = URL(string: "https://api.weather.gov/alerts/active?area=FL")!
 
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let floodAlertResponse = try JSONDecoder().decode(FloodAlertResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        self.floodAlerts = floodAlertResponse.features.map { $0.properties }
+                    }
+                    print("Fetched Flood Alerts: \(floodAlertResponse)")
+                } catch {
+                    print("Error decoding flood alerts: \(error)")
+                }
+            } else if let error = error {
+                print("Error fetching flood alerts: \(error)")
+            }
+        }.resume()
+    }
     func getDisasterDataBasedOnState(state: String) {
         // Store state name for display purposes
         self.stateName = state

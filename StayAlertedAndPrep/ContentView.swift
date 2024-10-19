@@ -17,7 +17,10 @@ struct ContentView: View {
                     Image(systemName: "cloud.rain")
                     Text("Flood Zone")
                 }
-
+            FloodAlertsView()
+                .tabItem {
+                    Label("Flood Alert", systemImage: "cloud.rain")
+                }
             // Hurricane Tracker Tab
             Text("Hurricane Tracker")
                 .tabItem {
